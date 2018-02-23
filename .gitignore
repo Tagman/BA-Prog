@@ -1,6 +1,8 @@
 ### My own stuff ###
 
-/build/**
+build/**
+src/external/gtest/**
+!src/external/gtest/CMakeLists.txt
 
 
 
