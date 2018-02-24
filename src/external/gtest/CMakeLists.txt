@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 2.8.8)
 project(gtest_builder C CXX)
 include(ExternalProject)
+include(FindUnixCommands)
 
 set(GTEST_FORCE_SHARED_CRT ON)
 set(GTEST_DISABLE_PTHREADS OFF)
@@ -17,7 +18,7 @@ ExternalProject_Add(googletest
     BINARY_DIR      "${CMAKE_BINARY_DIR}/googletest"
     INSTALL_DIR     "${PROJECT_SOURCE_DIR}/lib"
     STAMP_DIR       "${PROJECT_SOURCE_DIR}/googletest-stamp"
-    BUILD_ALWAYS    true
+    BUILD_ALWAYS    false
     CMAKE_ARGS -DCMAKE_ARCHIVE_OUTPUT_DIRECTORY_DEBUG:PATH=DebugLibs
     -DCMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE:PATH=ReleaseLibs
     -DCMAKE_CXX_FLAGS=${MSVC_COMPILER_DEFS}
@@ -30,7 +31,14 @@ ExternalProject_Add(googletest
     INSTALL_COMMAND ""
     )
 
-    add_custom_target(NAME googleInstall "find ${CMAKE_BINARY_DIR}/googletest -iname '*.a' -exec cp {} ${PROJECT_SOURCE_DIR}/lib \;" )
+MESSAGE(STATUS "gtest-src:  ${PROJECT_SOURCE_DIR}")
+
+add_custom_target(googleInstall ${BASH} -c "${PROJECT_SOURCE_DIR}/install.sh -s ${CMAKE_BINARY_DIR}/googletest -d ${PROJECT_SOURCE_DIR}/lib"
+                DEPENDS googletest
+                WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+                )
+    
+  
 
 # Specify include dir
 ExternalProject_Get_Property(googletest source_dir)
@@ -39,9 +47,9 @@ set(GMOCK_INCLUDE_DIR ${source_dir}/googlemock/include PARENT_SCOPE)
 
 
 # Specify MainTest's link libraries
-ExternalProject_Get_Property(googletest binary_dir)
-set(GTEST_LIBS_DIR ${binary_dir}/googlemock/gtest PARENT_SCOPE)
-set(GMOCK_LIBS_DIR ${binary_dir}/googlemock PARENT_SCOPE)
+#ExternalProject_Get_Property(googletest binary_dir)
+set(GTEST_LIBS_DIR ${PROJECT_SOURCE_DIR}/lib PARENT_SCOPE)
+set(GMOCK_LIBS_DIR ${PROJECT_SOURCE_DIR}/lib PARENT_SCOPE)
 
 MESSAGE( STATUS "GTEST-SRC:         " ${source_dir})
 MESSAGE( STATUS "GTEST-BIN:         " ${binary_dir})
