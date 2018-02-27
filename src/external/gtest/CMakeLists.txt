@@ -51,5 +51,4 @@ set(GMOCK_INCLUDE_DIR ${source_dir}/googlemock/include PARENT_SCOPE)
 set(GTEST_LIBS_DIR ${PROJECT_SOURCE_DIR}/lib PARENT_SCOPE)
 set(GMOCK_LIBS_DIR ${PROJECT_SOURCE_DIR}/lib PARENT_SCOPE)
 
-MESSAGE( STATUS "GTEST-SRC:         " ${source_dir})
 MESSAGE( STATUS "GTEST-BIN:         " ${binary_dir})

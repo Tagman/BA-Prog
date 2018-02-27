@@ -1,0 +1,23 @@
+language: cpp
+
+
+before_install:
+  - pip install --user cpp-coveralls
+
+install:
+  - gcov --version
+  - g++ --version
+  - cd build/debug
+  - rm -rf *
+  - cmake -DCMAKE_BUILD_TYPE=UnitTest ../../src
+
+script:
+  - make socket 
+  - make unit_TCP
+  - cd socket-lib
+  - ./unit_TCP --gtest_output="xml"
+  - cat test_detail.xml
+  - cd ../../..
+
+  after_success:
+    - coveralls --verbose --root . -e ./external
