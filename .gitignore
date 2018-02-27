@@ -4,6 +4,8 @@ build/**
 src/external/gtest/**
 !src/external/gtest/CMakeLists.txt
 
+src/socket-lib/cmake-build-unittest/**
+
 
 
 
