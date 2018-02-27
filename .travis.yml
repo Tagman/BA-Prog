@@ -12,12 +12,13 @@ install:
   - cmake -DCMAKE_BUILD_TYPE=UnitTest ../../src
 
 script:
-  - make socket 
-  - make unit_TCP
-  - cd socket-lib
-  - ./unit_TCP --gtest_output="xml"
-  - cat test_detail.xml
-  - cd ../../..
+- |
+  make socket && \
+  make unit_TCP && \
+  cd socket-lib && \
+  ./unit_TCP --gtest_output="xml" && \
+  cat test_detail.xml && \
+  cd ../../..
 
   after_success:
     - coveralls --verbose --root . -e ./external
