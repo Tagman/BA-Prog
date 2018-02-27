@@ -1,0 +1,3 @@
+[submodule "src/socket-lib"]
+	path = src/socket-lib
+	url = https://github.com/Tagman/socket-lib.git
