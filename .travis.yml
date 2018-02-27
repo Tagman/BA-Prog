@@ -7,8 +7,8 @@ before_install:
 install:
   - gcov --version
   - g++ --version
-  - cd build/debug
-  - rm -rf *
+  - mkdir -p build/unit
+  - cd build/unit
   - cmake -DCMAKE_BUILD_TYPE=UnitTest ../../src
 
 script:
