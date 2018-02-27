@@ -20,5 +20,5 @@ script:
   cat test_detail.xml && \
   cd ../../..
 
-  after_success:
-    - coveralls --verbose --root . -e ./external
+after_success:
+  - coveralls --verbose --root . -e ./external
