@@ -4,6 +4,7 @@ project(BA-Prog LANGUAGES CXX)
 
 #enable command line arguments
 option(COVERAGE "run the coverage analysis" OFF)
+option(COV_OUTPUT "enable targets for html, or xml output. Has additional dependecies" OFF)
 
 set(ext_dir ${CMAKE_SOURCE_DIR}/external )
 set(script_dir ${CMAKE_SOURCE_DIR}/../scripts )
@@ -29,12 +30,15 @@ if(COVERAGE)
 
         APPEND_COVERAGE_COMPILER_FLAGS()
 
-        set(COVERAGE_EXCLUDES '${ext_dir}/*'  )
+        if(COV_OUTPUT)
+                set(COVERAGE_EXCLUDES '${ext_dir}/*'  )
 
-        # add way to run all unittests with one target
-        SETUP_TARGET_FOR_COVERAGE(
-                NAME coverage_runner
-                EXECUTABLE unit_TCP -j ${PROCESSOR_COUNT}
-                DEPENDENCIES unit_TCP
-        )
+                # add way to run all unittests with one target
+                SETUP_TARGET_FOR_COVERAGE(
+                        NAME coverage_runner
+                        EXECUTABLE unit_TCP -j ${PROCESSOR_COUNT}
+                        DEPENDENCIES unit_TCP
+                )
+                
+        endif(COV_OUTPUT)
 endif(COVERAGE)
