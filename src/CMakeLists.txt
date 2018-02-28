@@ -2,8 +2,11 @@
 cmake_minimum_required(VERSION 3.2 FATAL_ERROR)
 project(BA-Prog LANGUAGES CXX)
 
+#enable command line arguments
+option(COVERAGE "run the coverage analysis" OFF)
+
 set(ext_dir ${CMAKE_SOURCE_DIR}/external )
-set(script_dir ${CMAKE_SOURCE_DIR}/scripts )
+set(script_dir ${CMAKE_SOURCE_DIR}/../scripts )
 # add external tools
 #add_subdirectory(${CMAKE_SOURCE_DIR}/external/gtest)
 
