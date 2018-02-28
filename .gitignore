@@ -3,6 +3,7 @@
 build/**
 src/external/gtest/**
 !src/external/gtest/CMakeLists.txt
+!src/external/gtest/install.sh
 
 src/socket-lib/cmake-build-unittest/**
 
