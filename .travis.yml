@@ -9,7 +9,7 @@ install:
   - g++ --version
   - mkdir -p build/unit
   - cd build/unit
-  - cmake -DCMAKE_BUILD_TYPE=UnitTest ../../src
+  - cmake -DCMAKE_BUILD_TYPE=UnitTest -DCOVERAGE=ON ../../src
 
 script:
 - |
@@ -21,4 +21,5 @@ script:
   cd ../../..
 
 after_success:
+  - pwd
   - coveralls --verbose --root . -e src/external
