@@ -21,4 +21,4 @@ script:
   cd ../../..
 
 after_success:
-  - coveralls --verbose --root . -e ./external
+  - coveralls --verbose --root . -e src/external
