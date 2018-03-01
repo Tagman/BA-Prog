@@ -25,20 +25,3 @@ add_subdirectory(${CMAKE_SOURCE_DIR}/networker)
 
 
 # setup coverage for whole project
-if(COVERAGE)
-        include( ${script_dir}/CodeCoverage.cmake )
-
-        APPEND_COVERAGE_COMPILER_FLAGS()
-
-        if(COV_OUTPUT)
-                set(COVERAGE_EXCLUDES '${ext_dir}/*'  )
-
-                # add way to run all unittests with one target
-                SETUP_TARGET_FOR_COVERAGE(
-                        NAME coverage_runner
-                        EXECUTABLE unit_TCP -j ${PROCESSOR_COUNT}
-                        DEPENDENCIES unit_TCP
-                )
-                
-        endif(COV_OUTPUT)
-endif(COVERAGE)

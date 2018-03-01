@@ -1,8 +1,11 @@
 language: cpp
 
+sudo: required
+
 
 before_install:
   - pip install --user cpp-coveralls
+  - apt install lcov
 
 install:
   - gcov --version
@@ -18,7 +21,7 @@ script:
   cd socket-lib && \
   ./unit_TCP --gtest_output="xml" && \
   cat test_detail.xml && \
-  cd ../../..
+  cd ../..
 
 after_success:
   - pwd
