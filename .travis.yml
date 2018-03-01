@@ -25,4 +25,4 @@ script:
 
 after_success:
   - pwd
-  - coveralls --verbose --root . -e src/external
+  - coveralls --verbose --root . -e src/external -e src/socket-lib/external
