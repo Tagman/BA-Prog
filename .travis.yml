@@ -5,11 +5,11 @@ sudo: required
 
 before_install:
   - pip install --user cpp-coveralls
-  - apt install lcov
+#  - apt install lcov
 
 install:
-  - gcov --version
-  - g++ --version
+#  - gcov --version
+#  - g++ --version
   - mkdir -p build/unit
   - cd build/unit
   - cmake -DCMAKE_BUILD_TYPE=UnitTest -DCOVERAGE=ON ../../src
